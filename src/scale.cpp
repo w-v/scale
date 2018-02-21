@@ -1,3 +1,4 @@
+#include <utils.h>
 #include <ncurses.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -23,8 +24,7 @@ int init(){
 int main(){
 
   init();
-  int x = 0;
-  int y = 0;
+  Coord pl(0,0);
   int wsize[2];
   int ch;
   while((ch = getch()) != 'q'){
@@ -32,27 +32,27 @@ int main(){
     switch(ch){
 
       case KEY_LEFT :
-        x--;
+        pl.x--;
         break;
       case KEY_RIGHT :
-        x++;
+        pl.x++;
         break;
       case KEY_UP :
-        y--;
+        pl.y--;
         break;
       case KEY_DOWN :
-        y++;
+        pl.y++;
         break;
 
     }
 
     getmaxyx(stdscr,wsize[0],wsize[1]);
-    if( x > wsize[1] || x < 0 || y > wsize[0] || y < 0 ){ 
-      x = 0;
-      y = 0;
+    if( pl.x > wsize[1] || pl.x < 0 || pl.y > wsize[0] || pl.y < 0 ){ 
+      pl.x = 0;
+      pl.y = 0;
     }
     clear();
-    wmove(stdscr,y,x);
+    wmove(stdscr,pl.y,pl.x);
     addch('o');
     refresh();                      /* Print it on to the real screen */
     usleep(10000);

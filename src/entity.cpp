@@ -1,9 +1,9 @@
-#include <utils.h>
+#include <vec2.h>
 
 class Entity {
 
 public:
-  Coord pos; 
+  Vec2<float> pos; 
   
 };
 

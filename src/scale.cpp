@@ -1,7 +1,9 @@
 #include <utils.h>
+#include <vec2.h>
 #include <ncurses.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <scale.h>
 
 
 #define god(x) x=3;y=12
@@ -24,7 +26,7 @@ int init(){
 int main(){
 
   init();
-  Coord pl(0,0);
+  Vec2<int> pl(0,0);                 /* Player */
   int wsize[2];
   int ch;
   while((ch = getch()) != 'q'){

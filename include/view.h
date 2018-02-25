@@ -14,7 +14,7 @@ public:
                                 /* forms the window the game is displayed in */ 
   Entity *followed
 
-  update(Entity *e);            /* move the view around entity */
+  follow(Entity *e);            /* move the view around entity */
 };
 
 #endif

@@ -7,7 +7,7 @@ using namespace std;
 
 class Graphic {
 public:
-  Vec2<int> size;
+ // Vec2<int> size;
   //char chars[size.y][size.x];
   
   vector<vector<int>> chars;

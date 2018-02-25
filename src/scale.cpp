@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <scale.h>
+#include <vector>
 
 
 #define god(x) x=3;y=12

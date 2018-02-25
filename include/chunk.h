@@ -2,6 +2,11 @@
 #define SCALE_CHUNK
 
 #define CHUNK_SIZE 16
+
+#include <vec2.h>
+#include <bloc.h>
+#include <terrain.h>
+
 class Chunk {
 
 public:
@@ -18,7 +23,9 @@ Vec2<int> coords;                       /* chunk coordinates (world coord)
                                          * (y is positive going up)
                                          */
 
-Bloc[16][16] blocs;
+Bloc blocs [CHUNK_SIZE][CHUNK_SIZE];
+
+Chunk(Vec2<int> coords, Bloc blocs[][] = 0);
 
 };
 

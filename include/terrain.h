@@ -9,14 +9,11 @@
 class Terrain {
 
 public:
-  std::vector<std::vector<Chunk>> ldchunks;          /* loaded chunks */
   
   //Vec2<int> ldcenter;								/* load around */
 
   void load(Chunk);                 /* load chunk i */
   
-  void moveload(Chunk, Vec2<int> coords);
-  void loadAround(Vec2<int> chunk_coords);
   Terrain();
 };
 

@@ -3,6 +3,7 @@
 
 #include <vec2.h>
 #include <entity.h>
+#include <world.h>
 
 class View {
 
@@ -12,9 +13,11 @@ public:
   Vec2<int> br;                 /* bottom right */
                                 /* : world coordinates */
                                 /* forms the window the game is displayed in */ 
-  Entity *followed
+  Entity *followed;
 
-  follow(Entity *e);            /* move the view around entity */
+  void follow(Entity *e);            /* move the view around entity */
+
+  void draw(World);
 };
 
 #endif

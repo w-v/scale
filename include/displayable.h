@@ -9,8 +9,8 @@ public:
   Graphic *graph;
   //Vec2<float> *pos;
   void display() const;
-  Displayable(Vec2<float> *p = new Vec2<float>(.0,.0));
-  Displayable(Graphic *g, Vec2<float> *p = new Vec2<float>(.0,.0));
+  //Displayable(Vec2<float> *p = new Vec2<float>(.0,.0));
+  //Displayable(Graphic *g, Vec2<float> *p = new Vec2<float>(.0,.0));
 };
 
 #endif

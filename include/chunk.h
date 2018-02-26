@@ -25,6 +25,8 @@ Vec2<int> coords;                       /* chunk coordinates (world coord)
 
 Bloc blocs [CHUNK_SIZE][CHUNK_SIZE];
 
+static const Vec2<int> chunk_size = Vec2<int>(CHUNK_SIZE,CHUNK_SIZE);
+
 Chunk(Vec2<int> coords, Bloc blocs[][] = 0);
 
 };

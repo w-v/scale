@@ -4,12 +4,10 @@
 #include <vec2.h>
 #include <displayable.h>
 
-class Bloc : public Displayable {
+class Bloc : public Char {
 
-  char type;                                    
-  Bloc(char c);
+  Bloc(char ch);
 
-  void display(Vec2<int> vcoords);
 };
 
 #endif

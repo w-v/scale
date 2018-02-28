@@ -5,24 +5,24 @@
 #include <entity.h>
 #include <world.h>
 #include <area.h>
+#include <box.h>
 
 class View {
 
 public:
   
 
-  Vec2<int> size;               /* size */
-  Vec2<int> orig;               /* bottom right */
+	Box<int> box;
                                 /* : world coordinates */
                                 /* forms the window the game is displayed in */ 
 
-  void follow(Vec2<int> pos);            /* move the view around entity */
+  void follow(Vec2<int> pos);            /* move the view around pos */
 
   void draw(World);
 
   void draw(Area);
 
-  void draw(Chunk);
+  Box<int> clip(Displayable);
 
 };
 

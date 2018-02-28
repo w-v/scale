@@ -14,11 +14,12 @@ public:
   Vec2<int> size;
 
   Chunk chunk(Vec2<int> coords);
-  //Vec2<int> ldcenter;								/* load around */
+
+  Terrain terrain;
 
   void loadWith(Terrain);                 /* load chunk i */
 
-  void loadAround(View);
+  void load(View);
   Area();
 };
 

@@ -2,15 +2,18 @@
 #define SCALE_GRAPHIC
 
 #include <vector>
+#include <char.h>
+#include <vec2.h>
 
 using namespace std;
 
 class Graphic {
 public:
- // Vec2<int> size;
-  //char chars[size.y][size.x];
+	Vec2<int> size;
   
-  vector<vector<int>> chars;
+  vector<vector<Char>> chars;
+
+  display(Vec2<int> )
 };
 
 #endif

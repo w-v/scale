@@ -5,6 +5,9 @@
 #include <unistd.h>
 #include <scale.h>
 #include <vector>
+#include <world.h>
+#include <view.h>
+#include <area.h>
 
 
 #define god(x) x=3;y=12
@@ -27,7 +30,26 @@ int init(){
 int main(){
 
   init();
-  Vec2<int> pl(0,0);                 /* Player */
+  int ch;
+  World *world = new World();
+  View *view = new View();
+  while((ch = getch()) != 'q'){
+
+  	world->tick();
+
+  	view->follow(Vec2<int>(0,0));
+
+  	world->load(*view);
+
+  	view->draw(*world);
+
+  	refresh();
+  	usleep(10000);
+  }
+  endwin();                       /* End curses mode                */
+  exit(0);
+	/*
+  Vec2<int> pl(0,0);
   int wsize[2];
   int ch;
   while((ch = getch()) != 'q'){
@@ -57,10 +79,8 @@ int main(){
     clear();
     wmove(stdscr,pl.y,pl.x);
     addch('o');
-    refresh();                      /* Print it on to the real screen */
+    refresh();
     usleep(10000);
-  }
-  endwin();                       /* End curses mode                */
-  exit(0);
+  }*/
 
 }

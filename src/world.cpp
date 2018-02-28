@@ -13,3 +13,10 @@ void World::tick(){
 
   time++;
 }
+
+void World::load(View view){
+
+
+  	this->area.load(*view);
+  	this->area.loadWith()
+}

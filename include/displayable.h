@@ -6,11 +6,9 @@
 
 class Displayable {
 public:
-  Graphic *graph;
-  //Vec2<float> *pos;
-  void display() const;
-  //Displayable(Vec2<float> *p = new Vec2<float>(.0,.0));
-  //Displayable(Graphic *g, Vec2<float> *p = new Vec2<float>(.0,.0));
+  Graphic graphic;
+  Vec2<int> coords;
+
 };
 
 #endif

@@ -11,7 +11,7 @@ public :
 	bool under;
 	bool bold;
 
-	Char(char);
+	Char(char c);
 };
 
 #endif

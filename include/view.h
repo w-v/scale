@@ -1,28 +1,40 @@
 #ifndef SCALE_VIEW
 #define SCALE_VIEW
 
-#include <vec2.h>
+/* Forward declarations */
+class Area;
+
 #include <entity.h>
 #include <world.h>
-#include <area.h>
-#include <box.h>
+#include <Eigen/Dense>
+
+
+using namespace Eigen;
 
 class View {
 
 public:
   
-
-	Box<int> box;
+	Matrix2i coords;
                                 /* : world coordinates */
                                 /* forms the window the game is displayed in */ 
 
-  void follow(Vec2<int> pos);            /* move the view around pos */
+  //void follow(Vector2i& pos);            /* move the view around pos */
 
-  void draw(World);
+	Vector2i update_lim;
 
-  void draw(Area);
+	Entity& followed;
 
-  Box<int> clip(Displayable);
+	void follow(Entity&);
+
+  void draw(World&);
+
+  void draw(Area&);
+
+  void update();
+
+  View(Entity& fol);
+
 
 };
 

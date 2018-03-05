@@ -1,14 +1,16 @@
 #include <area.h>
-#include <chunk.h>
+/*void Area::loadWith(Terrain t){
 
-void Area::loadWith(Terrain t){
-	this->terrain = t;
+}*/
+
+Area::Area(){
+
 }
 
-void Area::load(View view){
+void Area::load(View& v){
 
 	this->chunks.clear();
-
+/*
 	Vec2<int> orig = view.orig / CHUNK_SIZE;
 	Vec2<int> size = (view.size + view.orig) / CHUNK_SIZE;
 
@@ -23,6 +25,6 @@ void Area::load(View view){
 		}
 
 	}
-
+*/
 
 }

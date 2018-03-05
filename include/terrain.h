@@ -3,7 +3,9 @@
 
 #define DRAW_DISTANCE         25  /* in chunks around a center chunk */
 
-#include <chunk.h>
+/* Forward declarations */
+class Chunk;
+
 #include <vector>
 
 class Terrain {
@@ -12,7 +14,7 @@ public:
   
   //Vec2<int> ldcenter;								/* load around */
 
-  void load(Chunk);                 /* load chunk i */
+  void load(Chunk&);                 /* load chunk i */
   
   Terrain();
 };

@@ -4,13 +4,12 @@
 
 
 #include <entity.h>
-#include <scale.h>
 
 class Player : public Entity
 {
   public:
   
-  int[MAX_SIMULT_INPUT] getInput();             /* returns an array with all currently pressed keys */
+  //int[MAX_SIMULT_INPUT] getInput();             /* returns an array with all currently pressed keys */
  
   Player();
   

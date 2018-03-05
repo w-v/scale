@@ -1,9 +1,31 @@
-#include <vec2.h>
+#include <entity.h>
 
-class Entity {
+Entity::Entity()
+	: pos(Vector2f(0,0)), max_vel(10), acc(0), vel(0)
+{}
 
-public:
-  Vec2<float> pos; 
-  
-};
+Entity::Entity(Vector2f v)
+	: pos(v), max_vel(10), acc(0), vel(0)
+{
+
+	spawn(v);
+	round_coords();
+
+}
+
+
+void Entity::round_coords(){
+
+	coords = pos.array().round().matrix().cast<int>();			/* ugly */
+
+}
+
+
+void Entity::spawn(Vector2f v){
+
+	pos = Vector2f(0,0);
+
+}
+
+
 

@@ -1,25 +1,27 @@
 #ifndef SCALE_AREA
 #define SCALE_AREA
 
+/* Forward declarations */
+class View;
+class Area;
+
+
+
 #include <chunk.h>
 #include <vector>
 #include <terrain.h>
-#include <view.h>
+#include <Eigen/Dense>
 
 class Area {
 
 public:
-  std::vector<std::vector<Chunk>> chunks;          /* loaded chunks */
+  vector<vector<Chunk>> chunks;          /* loaded chunks */
 
-  Vec2<int> size;
 
-  Chunk chunk(Vec2<int> coords);
+  void loadWith(Terrain&);                 /* load chunk i */
 
-  Terrain terrain;
+  void load(View&);
 
-  void loadWith(Terrain);                 /* load chunk i */
-
-  void load(View);
   Area();
 };
 

@@ -3,17 +3,13 @@
 
 #include <vector>
 #include <char.h>
-#include <vec2.h>
+#include <Eigen/Dense>
 
 using namespace std;
 
-class Graphic {
+class Graphic : public vector<vector<Char>> {
 public:
-	Vec2<int> size;
-  
-  vector<vector<Char>> chars;
-
-  display(Vec2<int> )
+	Eigen::Vector2i size;
 };
 
 #endif

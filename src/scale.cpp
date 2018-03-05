@@ -1,14 +1,11 @@
-#include <utils.h>
-#include <vec2.h>
-#include <ncurses.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <scale.h>
 #include <vector>
-#include <world.h>
 #include <view.h>
-#include <area.h>
-
+#include <unistd.h>
+#include <stdlib.h>
+#include <ncurses.h>
+#include <iostream>
+#include <Eigen/Dense>
+#include <world.h>
 
 #define god(x) x=3;y=12
 
@@ -29,26 +26,36 @@ int init(){
 
 int main(){
 
+	//Eigen::Vector2i v(9,2);
+	Eigen::Vector2i a(1,3);
+	Eigen::Vector2i b(2,2);
+	std::cout << a.cwiseMax(b);
+
   init();
   int ch;
-  World *world = new World();
-  View *view = new View();
+  World world;
+  View view(world.player);
+
   while((ch = getch()) != 'q'){
 
-  	world->tick();
+  	world.tick();										/* updates player & mob positions, makes things happen */
 
-  	view->follow(Vec2<int>(0,0));
+  	view.update();									/* updates the "camera" (view) depending on the player movements */
 
-  	world->load(*view);
+  	world.area.load(view);					/* loads all graphics visible in the view */
 
-  	view->draw(*world);
+  	view.draw(world);								/* actually displays on the terminal what has been loaded */
 
   	refresh();
   	usleep(10000);
+
   }
-  endwin();                       /* End curses mode                */
-  exit(0);
-	/*
+  return 0;
+}
+  //endwin();                       /* End curses mode                */
+//  exit(0);
+
+  /*
   Vec2<int> pl(0,0);
   int wsize[2];
   int ch;
@@ -83,4 +90,4 @@ int main(){
     usleep(10000);
   }*/
 
-}
+//}

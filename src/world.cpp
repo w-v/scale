@@ -1,8 +1,8 @@
 #include <world.h>
 
-World::World(){
-  time = 0;
-}
+World::World()
+	: time(0), player(), area(), terrain()
+{}
 
 void World::tick(){
   
@@ -14,9 +14,3 @@ void World::tick(){
   time++;
 }
 
-void World::load(View view){
-
-
-  	this->area.load(*view);
-  	this->area.loadWith()
-}

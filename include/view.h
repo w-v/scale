@@ -25,13 +25,18 @@ public:
 
 	Entity& followed;
 
+	Vector2i y_down_transf;
+
 	void follow(Entity&);
 
   void draw(World&);
 
   void draw(Area&);
+  void draw(Displayable&);
 
   void update();
+
+  void display(Char&, Vector2i&);
 
   View(Entity& fol);
 

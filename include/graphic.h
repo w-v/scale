@@ -8,8 +8,14 @@
 using namespace std;
 
 class Graphic : public vector<vector<Char>> {
+
 public:
 	Eigen::Vector2i size;
+
+
+	Graphic(Eigen::Vector2i);
+
+
 };
 
 #endif

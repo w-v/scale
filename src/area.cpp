@@ -1,30 +1,26 @@
 #include <area.h>
-/*void Area::loadWith(Terrain t){
-
-}*/
+#include <view.h>
+#include <terrain.h>
 
 Area::Area(){
 
 }
 
-void Area::load(View& v){
+void Area::load(View& v, Terrain& t){
 
-	this->chunks.clear();
-/*
-	Vec2<int> orig = view.orig / CHUNK_SIZE;
-	Vec2<int> size = (view.size + view.orig) / CHUNK_SIZE;
+	//clear();
 
-	for(int i = orig.y; i < size.y; i++){
+	int orig = v.coords(0,0) / CHUNK_SIZE;
+	int size = v.coords(0,1) / CHUNK_SIZE;
 
-		for(int j = orig.x; j < size.x; j++){
+		for(int i = orig-1; i < size+1; i++){
 
-			this->chunks[i][j] = new Chunk(j, i);
+			push_back( Chunk(Vector2i(i*16,0)) );
 
-			this->terrain.load(this->chunks[i][j]);
+
+			t.load(this->back());
 
 		}
 
-	}
-*/
 
 }

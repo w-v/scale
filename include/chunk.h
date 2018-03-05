@@ -15,6 +15,8 @@ public:
 
   static Vector2i size;
 
+  Chunk(Vector2i v) : Displayable(v,size) {};
+
 
 };
 

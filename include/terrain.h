@@ -6,14 +6,10 @@
 /* Forward declarations */
 class Chunk;
 
-#include <vector>
-
 class Terrain {
 
 public:
   
-  //Vec2<int> ldcenter;								/* load around */
-
   void load(Chunk&);                 /* load chunk i */
   
   Terrain();

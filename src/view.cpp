@@ -2,15 +2,18 @@
 #include <ncurses.h>
 
 
+
 View::View(Entity& fol)
 	: followed(fol)
 {
 	Vector2i win_size;
 	getmaxyx(stdscr, win_size.y(), win_size.x());
-	coords.col(0) = fol.coords - (win_size / 2);
-	coords.col(1) = fol.coords + (win_size / 2);
+	coords << (fol.coords - (win_size / 2)),
+						(fol.coords + (win_size / 2));
 
 	update_lim = Vector2i(5,5);
+
+	y_down_transf = Vector2i(0,win_size.y());
 }
 
 void View::draw(World& world){
@@ -20,20 +23,57 @@ void View::draw(World& world){
 
 void View::draw(Area& area){
 
+	for(int i = 0; i < area.size(); i++){
 
-	for(int i = 0 ; i < area.chunks.size() ; i++){
 
-		for(int j = 0 ; j < area.chunks.size() ; j++){
-
-			area.chunks[i][j];
-
-		}
+		draw(area[i]);
 
 	}
 
 
 }
 
+void View::draw(Displayable& d){
+
+
+	Vector2i dend = d.coords + d.graphic.size;
+
+
+	Vector2i clip_orig = d.coords.cwiseMax(this->coords.col(0));
+	Vector2i clip_end = dend.cwiseMin(this->coords.col(1));
+
+	Vector2i vorig = clip_orig - this->coords.col(0);
+
+	clip_orig = clip_orig - d.coords;
+	clip_end = clip_end - d.coords;
+
+	//mvprintw(1,0,"clip_orig : (%d,%d), clip_end : (%d,%d)",clip_orig.x(),clip_orig.y(),clip_end.x(), clip_end.y() );
+	Vector2i proj = vorig;
+	for(int i = clip_orig.y(); i <= clip_end.y(); i++){
+
+		for(int j = clip_orig.x(); j < clip_end.x(); j++){
+
+			display(d.graphic[i][j], proj);
+
+			proj(0)= proj(0)+1;
+
+		}
+
+		proj(0) = vorig.x();
+		proj(1) = proj(1)+1;
+
+	}
+
+
+}
+
+void View::display(Char& c, Vector2i& v){
+		// TODO : adjust to y down
+    //mvprintw(2,0,"displaying %c at y : %d, x : %d", c.ch, v.y(), v.x());
+    wmove(stdscr,y_down_transf.y()-v.y(),v.x());
+    addch(c.ch);
+
+}
 void View::update(){
 	Vector2i mov;
 

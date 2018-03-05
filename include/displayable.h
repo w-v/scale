@@ -21,6 +21,8 @@ public:
                                          * (y is positive going up)
                                          */
 
+  	Displayable(Vector2i = Vector2i(0,0));
+  	Displayable(Vector2i, Vector2i);
 };
 
 #endif

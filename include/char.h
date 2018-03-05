@@ -12,6 +12,7 @@ public :
 	bool bold;
 
 	Char(char c);
+	Char();
 };
 
 #endif

@@ -12,15 +12,12 @@ class Area;
 #include <terrain.h>
 #include <Eigen/Dense>
 
-class Area {
+class Area : public vector<Chunk>{
 
 public:
-  vector<vector<Chunk>> chunks;          /* loaded chunks */
 
 
-  void loadWith(Terrain&);                 /* load chunk i */
-
-  void load(View&);
+  void load(View&, Terrain&);
 
   Area();
 };

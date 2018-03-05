@@ -38,17 +38,20 @@ int main(){
 
   while((ch = getch()) != 'q'){
 
+
   	world.tick();										/* updates player & mob positions, makes things happen */
 
   	view.update();									/* updates the "camera" (view) depending on the player movements */
 
-  	world.area.load(view);					/* loads all graphics visible in the view */
+  	world.area.load(view,world.terrain);					/* loads all graphics visible in the view */
 
   	view.draw(world);								/* actually displays on the terminal what has been loaded */
 
+    //mvprintw(0,0,"%d", world.time);
+
   	refresh();
   	usleep(10000);
-
+  	//return 0;
   }
   return 0;
 }

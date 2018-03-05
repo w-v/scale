@@ -1,10 +1,10 @@
 #include <displayable.h>
-#include <vec2.h>
-/*
-Displayable::Displayable(Vec2<float> *p) : 
+
+Displayable::Displayable(Vector2i v)
+	: coords(v), graphic(Graphic(Vector2i(0,0)))
 {}
 
-Displayable::Displayable(Graphic *g, Vec2<float> *p) : 
-  graph(g),
-{}*/
 
+Displayable::Displayable(Vector2i v, Vector2i s)
+	: coords(v), graphic(Graphic(s))
+{}

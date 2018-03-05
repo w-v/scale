@@ -6,7 +6,7 @@ Terrain::Terrain(){
 
 }
 
-void load(Chunk& chunk){
+void Terrain::load(Chunk& chunk){
 	for(int i=0;i<chunk.size(0);i++){
 		for(int j=0;j<chunk.size(1);j++){
 			chunk.graphic[i][j] = Bloc('M');

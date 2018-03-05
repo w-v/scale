@@ -13,3 +13,6 @@ Char::Char(char c)
 
 
 
+Char::Char()
+	: ch(' '), color(0), bcolor(0), under(false), bold(false)
+{}

@@ -19,6 +19,7 @@ View::View(Entity& fol)
 void View::draw(World& world){
 
 	this->draw(world.area);
+	this->draw(world.player);
 }
 
 void View::draw(Area& area){
@@ -49,11 +50,14 @@ void View::draw(Displayable& d){
 
 	//mvprintw(1,0,"clip_orig : (%d,%d), clip_end : (%d,%d)",clip_orig.x(),clip_orig.y(),clip_end.x(), clip_end.y() );
 	Vector2i proj = vorig;
-	for(int i = clip_orig.y(); i <= clip_end.y(); i++){
+
+	// TODO :
+	//													 '=' is needed there for chunks to load top line of view, should not
+	for(int i = clip_orig.y(); i <  clip_end.y(); i++){
 
 		for(int j = clip_orig.x(); j < clip_end.x(); j++){
 
-			display(d.graphic[i][j], proj);
+			display(d.graphic[j][i], proj);
 
 			proj(0)= proj(0)+1;
 

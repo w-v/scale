@@ -1,4 +1,5 @@
 #include <world.h>
+#include <ncurses.h>
 
 World::World()
 	: time(0), player(), area(), terrain()
@@ -7,9 +8,7 @@ World::World()
 void World::tick(){
   
   
-  /* Update loop */
-  //vector<Displayable>::iterator it;
-  //it = objects.begin();
+	player.inputs = player.getInput(player.inputs);
 
   time++;
 }

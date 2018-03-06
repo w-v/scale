@@ -1,8 +1,10 @@
 #include <entity.h>
 
 Entity::Entity()
-	: pos(Vector2f(0.0,0.0)), max_vel(10), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0))
-{}
+	: pos(Vector2f(40.0,40.0)), max_vel(10), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0))
+{
+	round_coords();
+}
 
 Entity::Entity(Vector2f v)
 	: pos(v), max_vel(10), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0))
@@ -16,7 +18,7 @@ Entity::Entity(Vector2f v)
 
 void Entity::round_coords(){
 
-	//coords = pos.array().round().matrix().cast<int>();			/* ugly */
+	coords = pos.array().round().matrix().cast<int>();			/* ugly */
 
 }
 

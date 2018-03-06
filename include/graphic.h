@@ -5,9 +5,9 @@
 #include <char.h>
 #include <Eigen/Dense>
 
-using namespace std;
+//using namespace std;
 
-class Graphic : public vector<vector<Char>> {
+class Graphic : public std::vector<std::vector<Char>> {
 
 public:
 	Eigen::Vector2i size;

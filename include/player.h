@@ -4,12 +4,13 @@
 
 
 #include <entity.h>
+#include <controllable.h>
 
-class Player : public Entity
+class Player : public Entity, public Controllable
 {
   public:
   
-  //int[MAX_SIMULT_INPUT] getInput();             /* returns an array with all currently pressed keys */
+  //int[MAX_SIMULT_INPUT] getInput();
  
   Player();
   

@@ -32,11 +32,11 @@ int main(){
 	std::cout << a.cwiseMax(b);
 
   init();
-  int ch;
+  int ch = getch();
   World world;
   View view(world.player);
 
-  while((ch = getch()) != 'q'){
+  while(ch != 'q'){
 
 
   	world.tick();										/* updates player & mob positions, makes things happen */
@@ -47,7 +47,29 @@ int main(){
 
   	view.draw(world);								/* actually displays on the terminal what has been loaded */
 
-    //mvprintw(0,0,"%d", world.time);
+    mvprintw(0,0,"%d", world.time);
+
+    std::vector<int>& in = world.player.inputs;
+		mvprintw(2,0,"%c,%c,%c,%c", in[0],in[1],in[2],in[3]);
+		mvprintw(3,0,"(%d,%d)",world.player.coords.x(),world.player.coords.y());
+		ch = world.player.inputs[0];
+    switch(ch){
+
+      case KEY_LEFT :
+        world.player.coords.x()--;
+        break;
+      case KEY_RIGHT :
+        world.player.coords.x()++;
+        break;
+      case KEY_UP :
+        world.player.coords.y()++;
+        break;
+      case KEY_DOWN :
+        world.player.coords.y()--;
+        break;
+
+    }
+
 
   	refresh();
   	usleep(10000);

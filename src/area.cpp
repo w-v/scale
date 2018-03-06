@@ -8,7 +8,7 @@ Area::Area(){
 
 void Area::load(View& v, Terrain& t){
 
-	//clear();
+	clear();
 
 	int orig = v.coords(0,0) / CHUNK_SIZE;
 	int size = v.coords(0,1) / CHUNK_SIZE;

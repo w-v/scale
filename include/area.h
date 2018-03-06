@@ -8,11 +8,11 @@ class Area;
 
 
 #include <chunk.h>
-#include <vector>
+#include <deque>
 #include <terrain.h>
 #include <Eigen/Dense>
 
-class Area : public vector<Chunk>{
+class Area : public std::deque<Chunk>{
 
 public:
 

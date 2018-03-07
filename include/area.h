@@ -19,6 +19,10 @@ public:
 
   void load(View&, Terrain&);
 
+  Vector2i get_spawnable(int x);
+
+  bool is_loaded(int x);									/* is chunk containing coord x loaded ? */
+
   Area();
 };
 

@@ -17,6 +17,7 @@ public:
 
   Chunk(Vector2i v) : Displayable(v,size) {};
 
+  int ground_y(int x);
 
 };
 

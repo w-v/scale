@@ -1,6 +1,7 @@
 #include <area.h>
 #include <view.h>
 #include <terrain.h>
+#include <stdlib.h>
 
 Area::Area(){
 
@@ -23,4 +24,26 @@ void Area::load(View& v, Terrain& t){
 		}
 
 
+}
+
+bool Area::is_loaded(int x){
+
+	int orig = this->front().coords.x();
+	int end = this->back().coords.x();
+
+	return x >= orig && x <= end+CHUNK_SIZE;
+
+}
+Vector2i Area::get_spawnable(int x){
+
+	int orig = this->front().coords.x();
+
+	orig = ( x - orig ) / CHUNK_SIZE;
+
+	int offset = x % 16;
+
+	Chunk& sp = this->at(orig);
+
+	// TODO : make sure there is vertical  space to spawn ( if entity.graphic.size > (1,1) )
+	return Vector2i(x,this->at(orig).ground_y(abs(offset)));
 }

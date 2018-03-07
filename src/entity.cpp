@@ -1,16 +1,17 @@
 #include <entity.h>
+#include <area.h>
 
-Entity::Entity()
-	: pos(Vector2f(40.0,40.0)), max_vel(10), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0))
+
+Entity::Entity(World* w)
+	: pos(Vector2f(0.0,0.0)), max_vel(10), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0)), world(w)
 {
 	round_coords();
 }
 
-Entity::Entity(Vector2f v)
-	: pos(v), max_vel(10), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0))
+Entity::Entity(Vector2f v, World* w)
+	: pos(v), max_vel(10), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0)), world(w)
 {
 
-	spawn(v);
 	round_coords();
 
 }
@@ -23,11 +24,16 @@ void Entity::round_coords(){
 }
 
 
-void Entity::spawn(Vector2f v){
+void Entity::spawn(int x, Area& area){
 
-	pos = Vector2f(0.0,0.0);
+
+
+	pos = area.get_spawnable(x).cast<float>();
+	round_coords();
 
 }
 
 
-
+bool Entity::isongrnd(Area& area){
+	return coords.y() == area.get_spawnable(coords.x()).y();
+}

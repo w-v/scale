@@ -1,6 +1,10 @@
 #ifndef SCALE_ENTITY
 #define SCALE_ENTITY
 
+/* Forward declarations */
+class Area;
+class World;
+
 #include <displayable.h>
 #include <Eigen/Dense>
 
@@ -18,14 +22,18 @@ Vector2f pos;								/* Position in float precision */
 
 float max_vel;							/* in char per sec */
 
+World* world;
+
 void move(Vector2f);
 void update_pos();
 void round_coords();
 
-Entity(Vector2f);
-Entity();
+Entity(Vector2f, World*);
+Entity(World*);
 
-void spawn(Vector2f);
+void spawn(int, Area&);
+
+bool isongrnd(Area&);
 
 };
 

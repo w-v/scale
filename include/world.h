@@ -23,6 +23,10 @@ public:
 
   void tick();
 
+  void load(View&);
+
+  void init(View&);
+
   World();
 
 

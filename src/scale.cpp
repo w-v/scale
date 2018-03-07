@@ -1,7 +1,6 @@
 #include <vector>
 #include <view.h>
 #include <unistd.h>
-#include <stdlib.h>
 #include <ncurses.h>
 #include <iostream>
 #include <Eigen/Dense>
@@ -24,17 +23,15 @@ int init(){
   return 0;
 }
 
-int main(){
+World world;
 
-	//Eigen::Vector2i v(9,2);
-	Eigen::Vector2i a(1,3);
-	Eigen::Vector2i b(2,2);
-	std::cout << a.cwiseMax(b);
+int main(){
 
   init();
   int ch = getch();
-  World world;
   View view(world.player);
+
+  world.init(view);
 
   while(ch != 'q'){
 
@@ -43,38 +40,25 @@ int main(){
 
   	view.update();									/* updates the "camera" (view) depending on the player movements */
 
-  	world.area.load(view,world.terrain);					/* loads all graphics visible in the view */
+  	world.load(view);
 
   	view.draw(world);								/* actually displays on the terminal what has been loaded */
 
     mvprintw(0,0,"%d", world.time);
 
-    std::vector<int>& in = world.player.inputs;
-		mvprintw(2,0,"%c,%c,%c,%c", in[0],in[1],in[2],in[3]);
+    std::vector<input>& in = world.player.inputs;
+		mvprintw(1,0,"%d", world.player.status);
+		mvprintw(2,0,"%c,%c,%c,%c", in[0].ch,in[1].ch,in[2].ch,in[3].ch);
+		mvprintw(6,0,"%d,%d,%d,%d", in[0].ch,in[1].ch,in[2].ch,in[3].ch);
 		mvprintw(3,0,"(%d,%d)",world.player.coords.x(),world.player.coords.y());
-		ch = world.player.inputs[0];
-    switch(ch){
-
-      case KEY_LEFT :
-        world.player.coords.x()--;
-        break;
-      case KEY_RIGHT :
-        world.player.coords.x()++;
-        break;
-      case KEY_UP :
-        world.player.coords.y()++;
-        break;
-      case KEY_DOWN :
-        world.player.coords.y()--;
-        break;
-
-    }
-
+		mvprintw(4,0,"(%d,%d)(%d,%d)",view.coords.col(0).x(),view.coords.col(0).y(),view.coords.col(1).x(),view.coords.col(1).y());
+		ch = world.player.inputs[0].ch;
 
   	refresh();
   	usleep(10000);
   	//return 0;
   }
+  endwin();                       /* End curses mode                */
   return 0;
 }
   //endwin();                       /* End curses mode                */

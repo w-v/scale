@@ -2,18 +2,35 @@
 #define SCALE_PLAYER
 
 
-
 #include <entity.h>
 #include <controllable.h>
+#include <ncurses.h>
 
-class Player : public Entity, public Controllable
+
+enum Status {standing, walking, jumping, falling};
+
+class Player : public Controllable, public Entity
 {
+
+
   public:
   
-  //int[MAX_SIMULT_INPUT] getInput();
- 
-  Player();
+	Status status;
+
+	void update();
+  Player(World*);
   
+  void react(input);
+
+  void standing(int);
+  void walking(int);
+  void jumping(int);
+  void falling(int);
+
+  void stand();
+  void walk(float dir);
+  void jump(float dir);
+  void fall(float dir);
 };
 
 #endif

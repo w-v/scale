@@ -29,6 +29,8 @@ public:
 
 	void follow(Entity&);
 
+	void center(Vector2i&);
+
   void draw(World&);
 
   void draw(Area&);

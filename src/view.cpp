@@ -6,14 +6,25 @@
 View::View(Entity& fol)
 	: followed(fol)
 {
+
+	center(fol.coords);
+
+	update_lim = Vector2i(20,5);
+
 	Vector2i win_size;
 	getmaxyx(stdscr, win_size.y(), win_size.x());
-	coords << (fol.coords - (win_size / 2)),
-						(fol.coords + (win_size / 2));
-
-	update_lim = Vector2i(5,5);
-
 	y_down_transf = Vector2i(0,win_size.y());
+
+}
+
+void View::center(Vector2i& c){
+
+
+	Vector2i win_size;
+	getmaxyx(stdscr, win_size.y(), win_size.x());
+	coords << (c - (win_size / 2)),
+						(c + (win_size / 2));
+
 }
 
 void View::draw(World& world){
@@ -72,10 +83,11 @@ void View::draw(Displayable& d){
 }
 
 void View::display(Char& c, Vector2i& v){
-		// TODO : adjust to y down
     //mvprintw(2,0,"displaying %c at y : %d, x : %d", c.ch, v.y(), v.x());
-    wmove(stdscr,y_down_transf.y()-v.y(),v.x());
-    addch(c.ch);
+		//if(c.ch != ' '){
+			wmove(stdscr,y_down_transf.y()-v.y(),v.x());
+			addch(c.ch);
+		//}
 
 }
 void View::update(){
@@ -85,7 +97,7 @@ void View::update(){
 	a << update_lim,-update_lim;
 	coords += a;
 
-	mov = ( coords.col(1) - followed.coords.cwiseMax(coords.col(1)) )
+	mov = (followed.coords.cwiseMax(coords.col(1)) - coords.col(1) )
 			- ( coords.col(0) - followed.coords.cwiseMin(coords.col(0)) );
 
 	a << -update_lim+mov, update_lim+mov;

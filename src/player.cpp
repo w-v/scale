@@ -17,6 +17,12 @@ Player::Player(World* w) : Entity(w){
 
 void Player::update(){
 
+	//TODO :
+	//	when player changes direction, reset acc to 0
+	//	more reactive
+	//	more predictable
+
+
 	//mvprintw(5,0,"ch");
 	getInput(inputs, world->time);
 	//react_all(inputs);
@@ -29,6 +35,10 @@ void Player::update(){
 
 	}*/
 
+
+	if(inputs[0].ch == 'r'){
+		this->spawn(0, world->area);
+	}
 	//mvprintw(5,0,"sz: %d",inputs.size());
 	for(int i=0; i<inputs.size()-1; i++){
 
@@ -43,15 +53,25 @@ void Player::update(){
 	}
 
 	vel=Vector2f(max_vel,max_vel).cwiseMin(acc+vel).cwiseMax(Vector2f(-max_vel,-max_vel));
-	pos+=vel;
+	pos=collide(world->area);
 
 	round_coords();
-	if(status == Status::falling && isongrnd(world->area)){
+	Vector2i v = coords + Vector2i(0,-1);
+	if(world->area.is_solid(v)){
 
-		status = Status::standing;
-		vel.setZero();
-		acc.setZero();
-		spawn(coords.x(), world->area);
+		if(status == Status::falling){
+			status = Status::standing;
+			vel.setZero();
+			acc.setZero();
+			//spawn(coords.x(), world->area);
+		}
+
+	}
+	else{
+		//if(!isongrnd(world->area) && status != Status::falling){
+		if(status != Status::falling){
+			fall(0);
+		}
 	}
 }
 
@@ -96,10 +116,10 @@ void Player::standing(int in){
     switch(in){
 
       case KEY_LEFT :
-      	walk(-0.020);
+      	walk(-0.080);
         break;
       case KEY_RIGHT :
-      	walk(0.020);
+      	walk(0.080);
         break;
       case KEY_UP :
       	jump(0);

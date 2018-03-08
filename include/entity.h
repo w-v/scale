@@ -35,6 +35,8 @@ void spawn(int, Area&);
 
 bool isongrnd(Area&);
 
+Vector2f collide(Area&);
+
 };
 
 #endif

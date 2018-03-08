@@ -38,12 +38,27 @@ Vector2i Area::get_spawnable(int x){
 
 	int orig = this->front().coords.x();
 
-	orig = ( x - orig ) / CHUNK_SIZE;
+	orig = abs( x - orig ) / CHUNK_SIZE;
 
-	int offset = x % 16;
+	int offset = x % CHUNK_SIZE;
 
 	Chunk& sp = this->at(orig);
 
 	// TODO : make sure there is vertical  space to spawn ( if entity.graphic.size > (1,1) )
 	return Vector2i(x,this->at(orig).ground_y(abs(offset)));
+}
+
+bool Area::is_solid(Vector2i& v){
+	if(!is_loaded(v.x()))
+		return false;
+
+	int orig = this->front().coords.x();
+
+	orig = abs( orig - v.x());
+
+	int offset = orig % CHUNK_SIZE;
+
+	orig/= CHUNK_SIZE;
+
+	return this->at(orig).graphic[abs(offset)][v.y()].ch != ' ';
 }

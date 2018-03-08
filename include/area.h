@@ -23,6 +23,8 @@ public:
 
   bool is_loaded(int x);									/* is chunk containing coord x loaded ? */
 
+  bool is_solid(Vector2i&);
+
   Area();
 };
 

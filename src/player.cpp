@@ -32,7 +32,9 @@ void Player::update(){
 	//mvprintw(5,0,"sz: %d",inputs.size());
 	for(int i=0; i<inputs.size()-1; i++){
 
-		react(inputs[i]);
+		if(inputs[i].ch != -1){
+			react(inputs[i]);
+		}
 
 	}
 
@@ -40,7 +42,7 @@ void Player::update(){
 		react(inputs[0]);
 	}
 
-	vel=Vector2f(max_vel,max_vel).cwiseMin(acc+vel);
+	vel=Vector2f(max_vel,max_vel).cwiseMin(acc+vel).cwiseMax(Vector2f(-max_vel,-max_vel));
 	pos+=vel;
 
 	round_coords();
@@ -94,10 +96,10 @@ void Player::standing(int in){
     switch(in){
 
       case KEY_LEFT :
-      	walk(-0.5);
+      	walk(-0.020);
         break;
       case KEY_RIGHT :
-      	walk(0.5);
+      	walk(0.020);
         break;
       case KEY_UP :
       	jump(0);
@@ -109,13 +111,13 @@ void Player::walking(int in){
     switch(in){
 
       case KEY_LEFT :
-      	walk(-0.5);
+      	walk(-0.020);
         break;
       case KEY_RIGHT :
-      	walk(0.5);
+      	walk(0.020);
         break;
       case KEY_UP :
-      	jump(vel.x());
+      	jump(0);
         break;
       default :
       	stand();
@@ -133,10 +135,10 @@ void Player::falling(int in){
     switch(in){
 
       case KEY_LEFT :
-      	fall(-0.3);
+      	fall(-0.03);
         break;
       case KEY_RIGHT :
-      	fall(0.3);
+      	fall(0.03);
         break;
       default :
       	fall(0);
@@ -153,12 +155,13 @@ void Player::stand(){
 void Player::walk(float dir){
 
 	status = Status::walking;
-	acc(0) = dir;
+	acc(0) += dir;
 
 }
 
 void Player::jump(float dir){
 	status = Status::jumping;
+	acc(0)/=4;
 	vel+= Vector2f(dir,0.4);
 }
 

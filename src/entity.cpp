@@ -3,7 +3,7 @@
 
 
 Entity::Entity(World* w)
-	: pos(Vector2f(0.0,0.0)), max_vel(10), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0)), world(w)
+	: pos(Vector2f(0.0,0.0)), max_vel(0.5), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0)), world(w)
 {
 	round_coords();
 }

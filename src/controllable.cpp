@@ -36,7 +36,7 @@ std::vector<input>& Controllable::getInput( std::vector<input>& in , unsigned in
 		//}
 
 			for(it = in.begin(); it != in.end(); ++it){
-				if(time - (*it).time > 2){
+				if(time - (*it).time > 6){
 					in.erase(it);
 				}
 			}

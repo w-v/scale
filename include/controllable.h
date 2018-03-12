@@ -45,7 +45,7 @@ class Controllable{
 
 public:
 
-	std::vector<input> inputs;
+	bool inputs[128];
 
 	std::vector<input>& getInput( std::vector<input>& , unsigned int time);						/* returns an array with all currently pressed keys */
 

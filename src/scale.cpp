@@ -55,7 +55,7 @@ int main(){
 		ch = world.player.inputs[0].ch;
 
   	refresh();
-  	usleep(10000);
+  	//usleep(100);
   	//return 0;
   }
   endwin();                       /* End curses mode                */

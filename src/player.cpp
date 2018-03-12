@@ -189,6 +189,6 @@ void Player::fall(float dir){
 
 		status = Status::falling;
 		vel+= Vector2f(dir,0);
-		acc+= Vector2f(0,-0.004);
+		acc+= Vector2f(0,-0.008);
 
 }

@@ -13,6 +13,7 @@ class Player : public Controllable, public Entity
 {
 
 
+
   public:
   
 	Status status;

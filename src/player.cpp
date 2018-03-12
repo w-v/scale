@@ -23,34 +23,14 @@ void Player::update(){
 	//	more predictable
 
 
-	//mvprintw(5,0,"ch");
-	getInput(inputs, world->time);
-	//react_all(inputs);
-	std::vector<input>::const_iterator it;
-
-	/*for(it = inputs.begin(); it != inputs.end(); ++it){
-
-		mvprintw(5,0,"ch: %c",(*it).ch);
-		react(*it);
-
-	}*/
 
 
-	if(inputs[0].ch == 'r'){
+
+	if(inputs[KEY_R]){
 		this->spawn(0, world->area);
 	}
-	//mvprintw(5,0,"sz: %d",inputs.size());
-	for(int i=0; i<inputs.size()-1; i++){
 
-		if(inputs[i].ch != -1){
-			react(inputs[i]);
-		}
-
-	}
-
-	if(inputs.size() == 1){
-		react(inputs[0]);
-	}
+	react();
 
 	vel=Vector2f(max_vel,max_vel).cwiseMin(acc+vel).cwiseMax(Vector2f(-max_vel,-max_vel));
 	pos=collide(world->area);
@@ -75,94 +55,94 @@ void Player::update(){
 	}
 }
 
-void Player::react(input in){
+void Player::react(){
 
-		switch(status){
+	switch(status){
 
-			case Status::standing :
-				standing(in.ch);
-				break;
-			case Status::walking :
-				walking(in.ch);
-				break;
-			case Status::jumping :
-				jumping(in.ch);
-				break;
-			case Status::falling :
-				falling(in.ch);
-				break;
-		}
+	case Status::standing :
+		standing();
+		break;
+	case Status::walking :
+		walking();
+		break;
+
+	case Status::jumping :
+		jumping();
+		break;
+
+	case Status::falling :
+		falling();
+		break;
+
+	}
 	/*
-    switch(in){
 
-      case KEY_LEFT :
+
+      if(input[105])
         coords.x()--;
-        break;
-      case KEY_RIGHT :
+
+      if(inputs[106])
         coords.x()++;
-        break;
-      case KEY_UP :
+
+      if(inputs[103])
         coords.y()++;
-        break;
+
       case KEY_DOWN :
         coords.y()--;
-        break;
+
 
     }*/
 
 }
 
-void Player::standing(int in){
-    switch(in){
+void Player::standing(){
 
-      case KEY_LEFT :
-      	walk(-0.080);
-        break;
-      case KEY_RIGHT :
-      	walk(0.080);
-        break;
-      case KEY_UP :
-      	jump(0);
-        break;
-    }
-}
 
-void Player::walking(int in){
-    switch(in){
+	if(inputs[105])
+		walk(-0.30);
 
-      case KEY_LEFT :
-      	walk(-0.020);
-        break;
-      case KEY_RIGHT :
-      	walk(0.020);
-        break;
-      case KEY_UP :
-      	jump(0);
-        break;
-      default :
-      	stand();
-    }
+	if(inputs[106])
+		walk(0.30);
+
+	if(inputs[103])
+		jump(0);
 
 }
 
+void Player::walking(){
 
-void Player::jumping(int in){
-	falling(in);
+
+	if(inputs[105])
+		walk(-0.30);
+
+	if(inputs[106])
+		walk(0.30);
+
+	if(inputs[103])
+		jump(0);
+
+	if( !(inputs[103]&inputs[105]&inputs[106]) )
+		stand();
+
 }
 
 
-void Player::falling(int in){
-    switch(in){
+void Player::jumping(){
+	falling();
+}
 
-      case KEY_LEFT :
-      	fall(-0.03);
-        break;
-      case KEY_RIGHT :
-      	fall(0.03);
-        break;
-      default :
-      	fall(0);
-    }
+
+void Player::falling(){
+
+
+	if(inputs[105])
+		fall(-0.01);
+
+	if(inputs[106])
+		fall(0.01);
+
+	if( !(inputs[105]&inputs[106]) )
+		fall(0);
 
 }
 
@@ -186,9 +166,8 @@ void Player::jump(float dir){
 }
 
 void Player::fall(float dir){
-
-		status = Status::falling;
-		vel+= Vector2f(dir,0);
-		acc+= Vector2f(0,-0.008);
+	status = Status::falling;
+	vel+= Vector2f(dir,0);
+	acc= Vector2f(0,-0.03);
 
 }

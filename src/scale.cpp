@@ -12,6 +12,7 @@
 // Initialize ncurses
 int init(){
 
+
   initscr();                    /* Start curses                         */
 
   raw();                        /* Disable line buffering               */
@@ -23,17 +24,17 @@ int init(){
   return 0;
 }
 
-World world;
 
 int main(){
 
   init();
-  int ch = getch();
+  sleep(1);
+  World world;
   View view(world.player);
 
   world.init(view);
 
-  while(ch != 'q'){
+  while(!world.player.inputs[0]){
 
 
   	world.tick();										/* updates player & mob positions, makes things happen */
@@ -44,20 +45,23 @@ int main(){
 
   	view.draw(world);								/* actually displays on the terminal what has been loaded */
 
-    mvprintw(0,0,"%d", world.time);
+    //mvprintw(0,0,"%d", world.time);
 
-    std::vector<input>& in = world.player.inputs;
+		mvprintw(1,0,"%d,%d,%d,%d", world.player.inputs[105],world.player.inputs[106],world.player.inputs[103],world.player.inputs[108]);
+    /*std::vector<input>& in = world.player.inputs;
 		mvprintw(1,0,"%d", world.player.status);
 		mvprintw(2,0,"%c,%c,%c,%c", in[0].ch,in[1].ch,in[2].ch,in[3].ch);
 		mvprintw(6,0,"%d,%d,%d,%d", in[0].ch,in[1].ch,in[2].ch,in[3].ch);
 		mvprintw(3,0,"(%d,%d)",world.player.coords.x(),world.player.coords.y());
 		mvprintw(4,0,"(%d,%d)(%d,%d)",view.coords.col(0).x(),view.coords.col(0).y(),view.coords.col(1).x(),view.coords.col(1).y());
-		ch = world.player.inputs[0].ch;
+		ch = world.player.inputs[0].ch;*/
 
   	refresh();
-  	//usleep(100);
+  	usleep(1000);
   	//return 0;
   }
+  mvprintw(10,10,"GAME OVER");
+  sleep(3);
   endwin();                       /* End curses mode                */
   return 0;
 }

@@ -11,7 +11,7 @@
 
 int is_keyboard(int);
 
-int read_kbd(bool * inputs);
+void* read_kbd(void* in);
 
 
 #endif /* INCLUDE_LOKI_H_ */

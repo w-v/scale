@@ -38,8 +38,10 @@ int is_keyboard(int fd)
   /* Sorry, this didn’t check out. */
   return 0;
 }
-int read_kbd(bool* inputs)
+void* read_kbd(void* in)
 {
+	bool * inputs = (bool *) in;
+	short int retv = 0;
   struct termios old_term, new_term;
   int kb = -1; /* keyboard file descriptor */
   char *files_to_try[] = {"/dev/pts/1", "/dev/tty", "/dev/console", NULL};
@@ -71,7 +73,7 @@ int read_kbd(bool* inputs)
     printf("Unable to find a file descriptor associated with "\
         "the keyboard.\n" \
         "Perhaps you’re not using a virtual terminal?\n");
-    return 1;
+    return (void *) &retv;
   }
   /* Find the keyboard’s mode so we can restore it later. */
   if (ioctl(kb, KDGKBMODE, &old_mode) != 0) {
@@ -111,20 +113,21 @@ int read_kbd(bool* inputs)
         (data & 0x80) ? "Released" : " Pressed",
         (unsigned int)data & 0x7F,
         (unsigned int)data & 0x7F);*/
-    		inputs[(data & 0x7F)] = data & 0x80;
+    		inputs[(data & 0x7F)] = !(data & 0x80);
     if ((data & 0x7F) == 1) {
-      printf("Escape pressed.\n");
-      pthread_exit((void*) 0);
+      //printf("Escape pressed.\n");
+    	break;
     }
   }
   /* Shut down nicely. */
-  printf("Exiting normally.\n");
+  //printf("Exiting normally.\n");
   ioctl(kb, KDSKBMODE, old_mode);
   tcsetattr(kb, 0, &old_term);
   if (kb > 3)
     close(kb);
+  inputs[0] = 1;
 	pthread_exit((void*) 0);
-  return 0;
+	return (void *) &retv;
 error:
   printf("Cleaning up.\n");
   fflush(stdout);
@@ -139,5 +142,5 @@ error:
   if (kb > 3)
     close(kb);
 	pthread_exit((void*) 1);
-  return 1;
+	return (void *) &retv;
 }

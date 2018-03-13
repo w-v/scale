@@ -13,6 +13,7 @@ class Player : public Controllable, public Entity
 {
 
 
+
   public:
   
 	Status status;
@@ -20,12 +21,12 @@ class Player : public Controllable, public Entity
 	void update();
   Player(World*);
   
-  void react(input);
+  void react();
 
-  void standing(int);
-  void walking(int);
-  void jumping(int);
-  void falling(int);
+  void standing();
+  void walking();
+  void jumping();
+  void falling();
 
   void stand();
   void walk(float dir);

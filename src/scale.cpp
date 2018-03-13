@@ -28,12 +28,12 @@ World world;
 int main(){
 
   init();
-  int ch = getch();
+  bool ch = 0;
   View view(world.player);
 
   world.init(view);
 
-  while(ch != 'q'){
+  while(!ch){
 
 
   	world.tick();										/* updates player & mob positions, makes things happen */
@@ -46,13 +46,13 @@ int main(){
 
     mvprintw(0,0,"%d", world.time);
 
-    std::vector<input>& in = world.player.inputs;
+    /*std::vector<input>& in = world.player.inputs;
 		mvprintw(1,0,"%d", world.player.status);
 		mvprintw(2,0,"%c,%c,%c,%c", in[0].ch,in[1].ch,in[2].ch,in[3].ch);
 		mvprintw(6,0,"%d,%d,%d,%d", in[0].ch,in[1].ch,in[2].ch,in[3].ch);
 		mvprintw(3,0,"(%d,%d)",world.player.coords.x(),world.player.coords.y());
-		mvprintw(4,0,"(%d,%d)(%d,%d)",view.coords.col(0).x(),view.coords.col(0).y(),view.coords.col(1).x(),view.coords.col(1).y());
-		ch = world.player.inputs[0].ch;
+		mvprintw(4,0,"(%d,%d)(%d,%d)",view.coords.col(0).x(),view.coords.col(0).y(),view.coords.col(1).x(),view.coords.col(1).y());*/
+		ch = world.player.inputs[38];
 
   	refresh();
   	usleep(10000);

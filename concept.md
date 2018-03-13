@@ -94,4 +94,30 @@ Issues :
             -> there should be worlds above the normal world, with a top world (level) being the god world (with only "G" (god) and "D" (godess) blocks)(sounds cheesy I know)
             -> the bottom world should be blocks composed with nothing (?)
                 -> basically if b is bottom level b should be many . forming b+1 type blocks, then if you scale down into a . you get a single ., and if you dive into that then nothing (?) or you cant (yeah, better solution). you get in top of that . and if you fall, you die (haha)
+                
+
+breaking blocks : the player faces left or right, when you press 'd', the '@' on top of the player comes down next to him in that direction
+
+ex :				@		press 'd'
+					o		->			o@                
+if there is a block next to you, the '@' will break it and place it in your inventory (stack of blocks)               
+if you press an arrow key while you press 'd', the player moves in that direction while holding the '@' (breaking blocks) in that direction (moving while breaking blocks)
+
+
+	-> the player could obtain multiples '@' to break multiple blocks at once, and then you would have to have a way to be using the number of '@' you want
+		-> '@' may require to be crafted, or found
+		
+		
+placing blocks : pressing 's' a block appears in the direction the player faces, when realeasing 's', the block gets placed
+
+if an arrow key is pressed while holding 's', the block will change place
+
+					@		press '<-'		 @
+ex :				oM		->				Mo
+
+
+<!> might need a solution to place blocks while moving without having to release s, move, tap s again, specify direction to place block, repeat
+         
+                
+
 

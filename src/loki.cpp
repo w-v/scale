@@ -113,7 +113,7 @@ void* read_kbd(void* in)
         (data & 0x80) ? "Released" : " Pressed",
         (unsigned int)data & 0x7F,
         (unsigned int)data & 0x7F);*/
-    		inputs[(data & 0x7F)] = !(data & 0x80);
+    inputs[(data & 0x7F)] = !(data & 0x80);
     if ((data & 0x7F) == 1) {
       //printf("Escape pressed.\n");
     	break;

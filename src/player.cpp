@@ -12,6 +12,8 @@
 
 //#include <ncurses.h>
 
+#define WALK_MVT			1200
+
 Player::Player(World* w) : Entity(w){
 	this->graphic = Graphic(Vector2i(1,2));
 	this->graphic[0][0] = Char('o');
@@ -36,7 +38,7 @@ void Player::update(){
 
 	react();
 	std::chrono::duration<float> dtime = std::chrono::duration_cast<std::chrono::duration<float>>(world->ntime - world->time);
-	vel=Vector2f(max_vel,max_vel).cwiseMin( ( acc*dtime.count() ) + vel).cwiseMax(Vector2f(-max_vel,-max_vel));
+	vel=Vector2f(max_vel,max_vel+5).cwiseMin( ( acc*dtime.count() ) + vel).cwiseMax(Vector2f(-max_vel,-max_vel-5));
 	//vel = vel + 0.05 * acc;
 	collide(world->area);
 	pos = pos + dtime.count() * vel;
@@ -95,10 +97,10 @@ void Player::standing(){
 
 
 	if(inputs[X_LEFT])
-		walk(-600);
+		walk(-WALK_MVT);
 
 	if(inputs[X_RIGHT])
-		walk(600);
+		walk(WALK_MVT);
 
 	if(inputs[X_UP])
 		jump(0);
@@ -111,10 +113,10 @@ void Player::walking(){
 
 
 	if(inputs[X_LEFT])
-		walk(-600);
+		walk(-WALK_MVT);
 
 	if(inputs[X_RIGHT])
-		walk(600);
+		walk(WALK_MVT);
 
 	if(inputs[X_UP])
 		jump(0);
@@ -135,10 +137,10 @@ void Player::falling(){
 
 
 	if(inputs[X_LEFT])
-		fall(-300);
+		fall(-200);
 
 	if(inputs[X_RIGHT])
-		fall(300);
+		fall(200);
 
 	if( !(inputs[X_LEFT]||inputs[X_RIGHT]) )
 		fall(0);
@@ -168,6 +170,6 @@ void Player::jump(float dir){
 void Player::fall(float dir){
 	status = Status::falling;
 
-	acc = ( Vector2f(0,-GRAVITY*60) + Vector2f(dir,0) ) / mass;
+	acc = ( Vector2f(0,-GRAVITY*80) + Vector2f(dir,0) ) / mass;
 
 }

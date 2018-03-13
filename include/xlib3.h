@@ -8,8 +8,8 @@
 #ifndef INCLUDE_XLIB3_H_
 #define INCLUDE_XLIB3_H_
 
-#define X_RIGHT		113
-#define X_LEFT		114
+#define X_RIGHT		114
+#define X_LEFT		113
 #define X_UP			111
 #define X_DOWN		116
 #define X_R				27

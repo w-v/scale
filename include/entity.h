@@ -22,6 +22,8 @@ Vector2f pos;								/* Position in float precision */
 
 float max_vel;							/* in char per sec */
 
+unsigned short int mass;
+
 World* world;
 
 void move(Vector2f);
@@ -35,7 +37,7 @@ void spawn(int, Area&);
 
 bool isongrnd(Area&);
 
-Vector2f collide(Area&);
+void collide(Area&);
 
 };
 

@@ -2,6 +2,7 @@
 #include <view.h>
 #include <terrain.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 Area::Area(){
 
@@ -9,12 +10,11 @@ Area::Area(){
 
 void Area::load(View& v, Terrain& t){
 
-	clear();
+	if(this->empty()){
+		int orig = v.coords(0,0) / CHUNK_SIZE;
+		int size = v.coords(0,1) / CHUNK_SIZE;
 
-	int orig = v.coords(0,0) / CHUNK_SIZE;
-	int size = v.coords(0,1) / CHUNK_SIZE;
-
-		for(int i = orig-1; i < size+1; i++){
+		for(int i = orig-2; i <= size+2; i++){
 
 			push_back( Chunk(Vector2i(i*16,0)) );
 
@@ -23,6 +23,45 @@ void Area::load(View& v, Terrain& t){
 
 		}
 
+	}
+	else{
+
+		int orig = v.coords(0,0) - ( v.coords(0,0) % CHUNK_SIZE );
+		int size = v.coords(0,1) - ( v.coords(0,1) % CHUNK_SIZE );
+
+
+		//fprintf(stderr,"s: %d o: %d",size + CHUNK_SIZE *2, orig - CHUNK_SIZE *2);
+		while(this->front().coords.x() != (orig - CHUNK_SIZE *2) ){
+
+			//fprintf(stderr,"%d a) %d, %d",v.followed.world->time,this->front().coords.x(),orig - CHUNK_SIZE *2);
+  	//usleep(1000000);
+
+			if( this->front().coords.x() > (orig - CHUNK_SIZE *2) ){
+				push_front( Chunk(Vector2i(this->front().coords.x() - CHUNK_SIZE  ,0)) );
+				t.load(this->front());
+			}
+			else {
+				pop_front();
+			}
+
+
+		}
+
+		while(this->back().coords.x() != (size + CHUNK_SIZE *2) ){
+
+			//fprintf(stderr,"b) %d, %d",this->back().coords.x(),(size + CHUNK_SIZE *2) );
+  	//usleep(1000000);
+			if( this->back().coords.x() < (size + CHUNK_SIZE *2) ){
+				push_back( Chunk(Vector2i(this->back().coords.x() + CHUNK_SIZE ,0)) );
+				t.load(this->back());
+			}
+			else {
+				pop_back();
+			}
+
+
+		}
+	}
 
 }
 

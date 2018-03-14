@@ -3,6 +3,7 @@
 #include <terrain.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <bloc.h>
 
 Area::Area(){
 
@@ -101,3 +102,26 @@ bool Area::is_solid(Vector2i& v){
 
 	return this->at(orig).graphic[abs(offset)][v.y()].ch != ' ';
 }
+
+
+void Area::break_block(Vector2i& v){
+
+	if(is_loaded(v.x())){
+
+	int orig = this->front().coords.x();
+
+	orig = abs( v.x() - orig );
+
+	int offset = orig % CHUNK_SIZE;
+	orig/= CHUNK_SIZE;
+
+		this->at(orig).graphic[abs(offset)][v.y()] = Bloc(' ');
+
+
+	}
+
+}
+
+
+
+// TODO : make a get_chunk and a get_block function

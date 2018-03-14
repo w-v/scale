@@ -25,6 +25,8 @@ public:
 
   bool is_solid(Vector2i&);
 
+  void break_block(Vector2i&);
+
   Area();
 };
 

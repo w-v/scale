@@ -8,7 +8,12 @@ class World;
 #include <displayable.h>
 #include <Eigen/Dense>
 
+#include <holding.h>
+
 using namespace Eigen;
+
+
+enum Direction : short {left, right, down, up};
 
 class Entity : public Displayable
 {
@@ -24,6 +29,10 @@ float max_vel;							/* in char per sec */
 
 unsigned short int mass;
 
+Holding holding;
+
+Direction dir = right;
+
 World* world;
 
 void move(Vector2f);
@@ -38,6 +47,7 @@ void spawn(int, Area&);
 bool isongrnd(Area&);
 
 void collide(Area&);
+
 
 };
 

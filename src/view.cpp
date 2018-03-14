@@ -33,6 +33,14 @@ void View::draw(World& world){
 	this->draw(world.player);
 }
 
+void View::draw(Entity& entity){
+
+	this->draw(static_cast<Displayable&>(entity));
+	this->draw(entity.holding);
+
+
+}
+
 void View::draw(Area& area){
 
 	for(int i = 0; i < area.size(); i++){

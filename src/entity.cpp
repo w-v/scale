@@ -3,13 +3,13 @@
 
 
 Entity::Entity(World* w)
-	: pos(Vector2f(0.0,0.0)), max_vel(15), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0)), world(w), mass(10)
+	: pos(Vector2f(0.0,0.0)), max_vel(15), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0)), world(w), mass(10), holding(Holding(*this))
 {
 	round_coords();
 }
 
 Entity::Entity(Vector2f v, World* w)
-	: pos(v), max_vel(10), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0)), world(w), mass(10)
+	: pos(v), max_vel(10), acc(Vector2f(0.0,0.0)), vel(Vector2f(0.0,0.0)), world(w), mass(10),holding(Holding(*this))
 {
 
 	round_coords();
@@ -70,3 +70,4 @@ void Entity::collide(Area& area){
 	}
 
 }
+

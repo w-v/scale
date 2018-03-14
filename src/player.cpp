@@ -15,10 +15,13 @@
 #define WALK_MVT			1200
 
 Player::Player(World* w) : Entity(w){
-	this->graphic = Graphic(Vector2i(1,2));
+	this->graphic = Graphic(Vector2i(1,1));
 	this->graphic[0][0] = Char('o');
-	this->graphic[0][1] = Char('@');
+
+	holding.graphic = Graphic(Vector2i(1,1));
+	holding.graphic[0][0] = Char('@');
 	status = Status::standing;
+
 }
 
 void Player::update(){
@@ -37,12 +40,23 @@ void Player::update(){
 	}
 
 	react();
+
 	std::chrono::duration<float> dtime = std::chrono::duration_cast<std::chrono::duration<float>>(world->ntime - world->time);
+
 	vel=Vector2f(max_vel,max_vel+5).cwiseMin( ( acc*dtime.count() ) + vel).cwiseMax(Vector2f(-max_vel,-max_vel-5));
-	//vel = vel + 0.05 * acc;
+
 	collide(world->area);
+
 	pos = pos + dtime.count() * vel;
+
 	round_coords();
+
+
+	this->holding.update_coords();
+
+	if(this->holding.is_held_down)
+		world->area.break_block(holding.coords);
+
 	Vector2i v = coords + Vector2i(0,-1);
 	if(world->area.is_solid(v)){
 
@@ -80,16 +94,16 @@ void Player::react(){
 		break;
 
 	}
-	/*
-      if(input[X_LEFT])
-        coords.x()--;
-      if(inputs[X_RIGHT])
-        coords.x()++;
-      if(inputs[X_UP])
-        coords.y()++;
-      case KEY_DOWN :
-        coords.y()--;
-    }*/
+
+	this->holding.is_held_down = inputs[X_DOWN];
+	if(inputs[X_LEFT])
+		dir = left;
+
+	if(inputs[X_RIGHT])
+		dir = right;
+
+	if(inputs[X_UP])
+		dir = down;					// NO
 
 }
 
@@ -129,7 +143,7 @@ void Player::walking(){
 
 void Player::jumping(){
 	//falling();
-	jump(0);
+		jump(0);
 }
 
 
@@ -162,9 +176,12 @@ void Player::walk(float dir){
 }
 
 void Player::jump(float dir){
-	status = Status::jumping;
-	//acc(0)/=4;
-	vel += Vector2f(dir,5000) / mass;
+	Vector2i v = Vector2i(0,1)+coords;
+	if( !world->area.is_solid(v) ) {
+		status = Status::jumping;
+		//acc(0)/=4;
+		vel += Vector2f(dir,5000) / mass;
+	}
 }
 
 void Player::fall(float dir){

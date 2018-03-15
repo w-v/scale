@@ -9,6 +9,11 @@ class Bloc : public Char {
 
 	Bloc(char c): Char(c) {}
 
+	Bloc();
+
+
+	Bloc clone();
+
 	// TODO : make Displayable have a variable type, that way chunk can be a displayable<Bloc>
 	// while player is a Displayable<Char>
 	// that way you can use Bloc functions inside of Chunk

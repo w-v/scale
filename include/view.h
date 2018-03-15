@@ -35,7 +35,7 @@ public:
 
   void draw(Area&);
   void draw(Entity&);
-  void draw(Displayable&);
+  void drawd(Displayable&);
 
   void update();
 

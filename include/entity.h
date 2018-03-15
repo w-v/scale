@@ -15,7 +15,7 @@ using namespace Eigen;
 
 enum Direction : short {left, right, down, up};
 
-class Entity : public Displayable
+class Entity : public Displayable<Char>
 {
 
 public:

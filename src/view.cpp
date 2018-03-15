@@ -35,25 +35,27 @@ void View::draw(World& world){
 
 void View::draw(Entity& entity){
 
-	this->draw(static_cast<Displayable&>(entity));
-	this->draw(entity.holding);
+	this->drawd(entity);
+	this->drawd(entity.holding);
 
 
 }
 
 void View::draw(Area& area){
 
+
+
 	for(int i = 0; i < area.size(); i++){
 
 
-		draw(area[i]);
+		drawd(area.at(i));
 
 	}
 
 
 }
 
-void View::draw(Displayable& d){
+void View::drawd(Displayable& d){
 
 
 	Vector2i dend = d.coords + d.graphic.size;

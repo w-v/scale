@@ -10,3 +10,16 @@ void Bloc::display(Vec2<int> vcoords){
 	addch(this->type);
 
 }*/
+
+
+Bloc Bloc::clone(){
+
+	Bloc v(this->ch);
+	v.bcolor = this->bcolor;
+	v.bold = this->bold;
+	v.color = this->color;
+	v.under = this->under;
+
+	return v;
+
+}

@@ -16,7 +16,7 @@ enum Direction : short;
 #include "displayable.h"
 
 
-class Holding : public Displayable
+class Holding : public Displayable<Char>
 {
 
 

@@ -7,7 +7,13 @@
 
 //using namespace std;
 
-class Graphic : public std::vector<std::vector<Char>> {
+class GenGraphic {
+
+
+};
+
+template <class T>
+class Graphic : public std::vector<std::vector<T>> , GenGraphic {
 
 public:
 	Eigen::Vector2i size;
@@ -18,4 +24,12 @@ public:
 
 };
 
+template <class T>
+Graphic<T>::Graphic(Eigen::Vector2i s)
+	: size(s)
+{
+	this->resize(s.x());
+	for (int i = 0; i < s.x(); ++i)
+	    this->at(i).resize(s.y());
+}
 #endif

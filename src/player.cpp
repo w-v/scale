@@ -15,10 +15,10 @@
 #define WALK_MVT			1200
 
 Player::Player(World* w) : Entity(w){
-	this->graphic = Graphic(Vector2i(1,1));
+	this->graphic = Graphic<Char>(Vector2i(1,1));
 	this->graphic[0][0] = Char('o');
 
-	holding.graphic = Graphic(Vector2i(1,1));
+	holding.graphic = Graphic<Char>(Vector2i(1,1));
 	holding.graphic[0][0] = Char('@');
 	status = Status::standing;
 

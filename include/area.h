@@ -10,6 +10,8 @@ class Area;
 #include <chunk.h>
 #include <deque>
 #include <terrain.h>
+#include <bloc.h>
+
 #include <Eigen/Dense>
 
 class Area : public std::deque<Chunk>{
@@ -25,7 +27,7 @@ public:
 
   bool is_solid(Vector2i&);
 
-  void break_block(Vector2i&);
+  Bloc break_block(Vector2i&);
 
   Area();
 };

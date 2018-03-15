@@ -5,6 +5,7 @@
 #include <entity.h>
 #include <controllable.h>
 #include <ncurses.h>
+#include <bloc.h>
 
 
 enum Status {standing, walking, jumping, falling};
@@ -17,6 +18,8 @@ class Player : public Controllable, public Entity
   public:
   
 	Status status;
+
+	Bloc breakotron = Bloc('@');
 
 	void update();
   Player(World*);

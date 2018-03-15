@@ -104,7 +104,7 @@ bool Area::is_solid(Vector2i& v){
 }
 
 
-void Area::break_block(Vector2i& v){
+Bloc Area::break_block(Vector2i& v){
 
 	if(is_loaded(v.x())){
 
@@ -115,8 +115,11 @@ void Area::break_block(Vector2i& v){
 	int offset = orig % CHUNK_SIZE;
 	orig/= CHUNK_SIZE;
 
+		Bloc broken = this->at(orig).graphic[abs(offset)][v.y()].clone();
 		this->at(orig).graphic[abs(offset)][v.y()] = Bloc(' ');
 
+
+		return broken;
 
 	}
 

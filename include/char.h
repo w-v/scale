@@ -13,6 +13,7 @@ public :
 
 	Char(char c);
 	Char();
+
 };
 
 #endif

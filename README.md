@@ -2,7 +2,7 @@
 
 ![preview](http://w-v.fr/img/scale1.png)
 
-a sandbox game in the terminal, with infinite "terrain" generation
+a minecraft-wannabe-like sandbox game in the terminal, with infinite "terrain" generation
 
 
 Using ncurses and a bit of Xlib for the input because ncurses inputs are terrible for games  

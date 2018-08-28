@@ -1,6 +1,6 @@
 # scale
 
-![preview](http://w-v.fr/img/scale.png)
+![preview](http://w-v.fr/img/scale1.png)
 
 a sandbox game in the terminal, with infinite "terrain" generation
 
